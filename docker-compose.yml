@@ -9,7 +9,7 @@ services:
             - 1194:1194/udp
         networks:
             vpn-net:
-                ipv4_address: 172.20.0.2
+                ipv4_address: 172.10.0.2
         environment:
             REQ_COUNTRY: US
             REQ_PROVINCE: California
@@ -32,7 +32,7 @@ services:
             - "openvpn"
         networks:
             vpn-net:
-                ipv4_address: 172.20.0.3
+                ipv4_address: 172.10.0.3
         volumes:
             - ./workdir:/opt/adguardhome/work
             - ./confdir:/opt/adguardhome/conf
@@ -52,5 +52,5 @@ networks:
         ipam:
             driver: default
             config:
-                -   subnet: 172.20.0.0/16
+                -   subnet: 172.10.0.0/16
 
