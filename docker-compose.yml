@@ -26,24 +26,24 @@ services:
         restart: unless-stopped
 
     pihole:
-        container_name: pihole
-        image: pihole/pihole:latest
+        container_name: adguard
+        image: adguard/adguardhome:latest
         depends_on:
             - "openvpn"
         networks:
             vpn-net:
                 ipv4_address: 172.20.0.2
-        environment:
-            TZ: "Europe/Berlin"
-            WEBPASSWORD: "password"
-            DNS1: 208.67.222.222 # OpenDNS
-            DNS2: 208.67.220.220
-            ServerIP: 172.20.0.2
         volumes:
-            - ./pihole/pihole:/etc/pihole
-            - ./pihole/dnsmasq.d:/etc/dnsmasq.d
-        cap_add:
-            - NET_ADMIN
+            - ./workdir:/opt/adguardhome/work
+            - ./confdir:/opt/adguardhome/conf
+        ports:
+          - 53:53/tcp
+          - 53:53/udp
+          - 784:784/udp
+          - 853:853/tcp
+          - 3000:3000/tcp
+          - 80:80/tcp
+          - 443:443/tcp
         restart: unless-stopped
 
 networks:
