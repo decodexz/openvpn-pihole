@@ -25,7 +25,7 @@ services:
             - NET_ADMIN
         restart: unless-stopped
 
-    pihole:
+    adguard:
         container_name: adguard
         image: adguard/adguardhome:latest
         depends_on:
